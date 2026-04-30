@@ -1,22 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CollisionDetect : MonoBehaviour
 {
-    [SerializeField] private GameObject thePlayer;     // Reference to the player
-    [SerializeField] private GameObject playerAnim;    // Reference to the player's Animator
-    [SerializeField] private GameObject retryUIPanel;  // Reference to the retry UI panel
+    [SerializeField] private GameObject thePlayer;
+    [SerializeField] private GameObject playerAnim;
 
     void OnTriggerEnter(Collider other)
     {
-        // Disable player movement
-        thePlayer.GetComponent<PlayerMovement>().enabled = false;
+        if (!GameState.IsPlaying) return;
 
-        // Play the stumble animation
+        thePlayer.GetComponent<PlayerMovement>().enabled = false;
         playerAnim.GetComponent<Animator>().Play("Stumble Backwards");
 
-        // Show the retry UI
-        retryUIPanel.SetActive(true);
+        if (GameState.Instance != null)
+        {
+            GameState.Instance.TriggerGameOver();
+        }
     }
 }
