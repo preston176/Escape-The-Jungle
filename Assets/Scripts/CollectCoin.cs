@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class CollectCoin : MonoBehaviour
 {
-    [SerializeField] AudioSource coinFX;
+    [SerializeField] AudioClip coinClip;
 
     void OnTriggerEnter(Collider other)
     {
-        // print("YOOOOOO");
-        coinFX.Play();
+        if (coinClip != null)
+        {
+            AudioSource.PlayClipAtPoint(coinClip, transform.position);
+        }
         MasterInfo.coinCount += 1;
         this.gameObject.SetActive(false);
-
     }
 
 }
