@@ -9,6 +9,8 @@ public class SegementGenerator : MonoBehaviour
     [SerializeField] bool creatingSegment = false;
     [SerializeField] int segmentNum;
 
+    const float SpawnX = -4.2f;
+
 
     void Update()
     {
@@ -17,13 +19,13 @@ public class SegementGenerator : MonoBehaviour
             creatingSegment = true;
             StartCoroutine(SegmentGen());
         }
-        
+
     }
 
     IEnumerator SegmentGen()
     {
         segmentNum = Random.Range(0, segment.Length);
-        Instantiate(segment[segmentNum], new Vector3(0, 0, zPos), Quaternion.identity);
+        Instantiate(segment[segmentNum], new Vector3(SpawnX, 0, zPos), Quaternion.identity);
         zPos += 50;
         yield return new WaitForSeconds(3);
         creatingSegment = false;
