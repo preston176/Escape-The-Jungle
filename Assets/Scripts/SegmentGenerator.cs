@@ -14,6 +14,8 @@ public class SegementGenerator : MonoBehaviour
 
     void Update()
     {
+        if (!GameState.IsPlaying) return;
+
         if(creatingSegment == false)
         {
             creatingSegment = true;

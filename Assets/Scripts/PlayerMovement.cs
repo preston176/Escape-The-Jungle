@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float playerSpeed = 7f;
-    public float laneSwitchSpeed = 20f;
+    public float laneSwitchSpeed = 10f;
     public float[] lanes = { -4f, 0f, 4f };
     public float swipeThresholdPixels = 50f;
 
@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (!GameState.IsPlaying) return;
+
         transform.Translate(Vector3.forward * Time.deltaTime * playerSpeed, Space.World);
 
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
